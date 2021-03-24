@@ -6,10 +6,16 @@ import {
 } from 'react';
 
 import { useField } from '@unform/core';
-
+import { IconType } from 'react-icons';
 import { Container } from './styles';
 
-const Input = ({ name, icon: Icon, ...rest }) => {
+interface IInputProps  {
+  name: string;
+  icon?: IconType;
+  placeholder: string;
+}
+
+export function Input ({ name, icon: Icon, ...rest }: IInputProps) {
   const inputRef = useRef(null);
 
   const [isFocused, setIsFocused] = useState(false);
@@ -24,7 +30,7 @@ const Input = ({ name, icon: Icon, ...rest }) => {
   const handleInputBlur = useCallback(() => {
     setIsFocused(false);
 
-    setIsFilled(!!inputRef.current?.value);
+    setIsFilled(!!inputRef.current);
   }, []);
 
   useEffect(() => {
@@ -49,5 +55,3 @@ const Input = ({ name, icon: Icon, ...rest }) => {
     </Container>
   );
 };
-
-export default Input;
